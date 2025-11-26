@@ -1,0 +1,181 @@
+---
+
+**W8 PRACTICE**
+
+**LISTS, PASS FUNCTIONS, LIFT STATES UP**
+
+**Learning objectives**
+
+* Generating Widgets with 'for' Loops
+* Render screens conditionally
+* Accepting and passing functions as values
+* Lift states up
+
+---
+
+### **How to submit?**
+
+Push your final code on your GitHub repository
+Then attach the GitHub path to the MS Team assignment and turn it in
+
+---
+
+### **Before practice, to be prepared!**
+
+Read the following documentation to be ready for this practice:
+
+* Render widgets conditionally
+* Lifting state up
+* Work with outlined buttons
+
+---
+
+## **EX 1 – 3 ways to create widgets with loops**
+
+Let’s explore 3 ways to create Widgets with Loops in Flutter!
+
+### **Integrating the Loop Directly into the List**
+
+In this approach, we integrate the loop within the array itself.
+It’s done using the for-loop syntax inside square brackets!
+
+```
+Column(
+  children: [
+    Text("Start"),
+    for (var i = 0; i < 10; i++) Text('Item $i'),
+    Text("End"),
+  ],
+)
+```
+
+### **Using the map() Method**
+
+```
+List<String> numbers = ["MON", "TUE", "WED", "THU"];
+
+Column(
+  children: [
+    Text("Start"),
+    ...numbers.map((item) => Text(item)).toList(),
+    Text("End"),
+  ],
+)
+```
+
+### **Using a Dedicated Function**
+
+We separate the logic of generating widgets into a dedicated function.
+
+```
+List<String> numbers = ["MON", "TUE", "WED", "THU"];
+
+List<Widget> getLabels() {
+  return numbers.map((item) => Text(item)).toList();
+}
+
+Column(
+  children: [
+    Text("Start"),
+    getLabels(),
+    Text("End"),
+  ],
+)
+```
+
+---
+
+### **Q1**
+
+In what scenarios might one approach be more advantageous than another?
+(in terms of readability, maintainability, performance, etc.)?
+
+---
+
+### **Q2 – Let’s code a bit!**
+
+We have a list of colors:
+
+```
+List<String> colors = ["red", "blue", "green"];
+```
+
+Create a Flutter app with a ListView that displays the colors using three different methods:
+
+1. Using a direct for loop within the widget list.
+2. Using the map() method on a list.
+3. Using a dedicated function to return a list of widgets.
+
+Each method should display the numbers in a different section of the screen.
+
+Note: You have start code with a custom Label widget to render text in bold.
+
+---
+
+## **EX 2 – Switching between screens using state**
+
+You are provided with a start code with 3 files.
+The objective is to start with the welcome screen and switch to the converter screen when clicking START.
+
+### **Q1 – Reflect in group**
+
+We need to conditionally display either the Welcome or the Temperature screen.
+How are you going to manage this?
+
+Explain your solution using a component diagram (WelcomeScreen + TemperatureScreen).
+
+### **Q2 – Once the solution is clear, code it individually.**
+
+---
+
+## **EX 3 – Refactor the code to bind with data**
+
+You are provided with a start code.
+The widgets are already created, but everything is static.
+
+You need to bind the widget `ProfileApp` with the data defined in the folder `/data`.
+
+The `ProfileData` model is defined as follows:
+(Description omitted in source, but referenced.)
+
+The ProfileApp widget must take a `ProfileData` object as argument.
+Each tile of the given profile data must be rendered in the profile app as a card.
+TIP: you will need to loop to render each tile.
+You also need to manage scrolling when too many tiles need to be displayed.
+
+For fun: customize this view! Update the layout and the data as you wish.
+
+---
+
+## **EX 4 – Manage a list of jokes**
+
+We start from code from W4-S3.
+
+### **Objectives**
+
+1. Create a database (jokes.dart) of jokes to populate the joke list.
+2. Display at least 20 jokes in a scrollable list.
+3. Only one joke can be marked as the best joke (heart icon).
+
+Only one joke can be the favorite.
+
+You will need to rethink your data structure and widget interaction:
+
+* What type of data will store the jokes?
+* What type of data will store the favorite joke?
+* Which widget should store the favorite joke?
+* Which widget should be stateful?
+* How will widgets interact?
+* Do you need to pass callback functions between widgets?
+
+---
+
+## **BONUS – Handle the TextField input**
+
+Continue from exercise 2 and make the temperature converter work properly.
+
+**TIP:**
+To get the value entered in the input field,
+use a state variable to handle this input field’s value.
+
+---

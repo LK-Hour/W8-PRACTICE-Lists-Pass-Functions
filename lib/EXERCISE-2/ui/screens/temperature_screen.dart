@@ -48,7 +48,7 @@ class TemperatureScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text('test'),
+              child: const Text('0'),
             ),
           ],
         ),
