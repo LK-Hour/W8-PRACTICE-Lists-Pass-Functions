@@ -39,7 +39,7 @@ class _JokesAppState extends State<JokesApp> {
         backgroundColor: appColor,
         title: const Text("Favorite Jokes"),
       ),
-      // Make the list scrollable
+
       body: ListView.builder(
         itemCount: jokes.length,
         itemBuilder: (context, index) {
@@ -54,7 +54,6 @@ class _JokesAppState extends State<JokesApp> {
   }
 }
 
-// Child widget - displays a single joke
 class FavoriteCard extends StatelessWidget {
   const FavoriteCard({
     super.key,
