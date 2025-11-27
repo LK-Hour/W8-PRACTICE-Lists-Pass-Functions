@@ -94,7 +94,7 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
               ),
               // Display the converted temperature
               child: Text(
-                celsius != null ? fahrenheit.toStringAsFixed(2) : '',
+                celsius != null ? fahrenheit.toStringAsFixed(2) : '0',
                 style: const TextStyle(fontSize: 16),
               ),
             ),
