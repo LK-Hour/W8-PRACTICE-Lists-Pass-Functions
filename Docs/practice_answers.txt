@@ -1,0 +1,114 @@
+W8 PRACTICE - ANSWERS
+
+EX 1 - 3 ways to create widgets with loops
+
+Q1: In what scenarios might one approach be more advantageous than another?
+
+1. Direct For Loop
+- Best for simple, small lists (5-10 items)
+- Easy to read but hard to reuse
+- Example: Quick widget generation in Column/Row
+
+2. map() Method
+- Best for transforming existing data into widgets
+- Clean functional style with spread operator (...)
+- Example: Converting list of names to Text widgets
+
+3. Dedicated Function
+- Best for complex or reusable widget generation
+- Keeps code maintainable and testable
+- Example: Complex card widgets used in multiple screens
+
+Note: For large lists (100+), use ListView.builder() for better performance.
+
+================================================================================
+
+EX 2 - Switching between screens using state
+
+Q1: How to manage conditional display of Welcome or Temperature screen?
+
+Solution:
+1. Create state variable: bool showWelcomeScreen = true
+2. Parent widget is StatefulWidget that manages which screen displays
+3. Use ternary operator: return showWelcomeScreen ? WelcomeScreen() : TemperatureScreen()
+4. Pass callback function to WelcomeScreen that updates state when START clicked
+
+Component Diagram:
+MainApp (StatefulWidget)
+  └── if showWelcomeScreen: WelcomeScreen (START button calls switchToConverter)
+  └── else: TemperatureScreen
+
+This is "lifting state up" - parent controls which screen shows, child just calls the callback function.
+
+================================================================================
+
+EX 3 - Refactor the code to bind with data
+
+Task: Replace hardcoded values in ProfileApp with data from ProfileData model.
+
+Steps:
+1. Update constructor: ProfileApp({required this.data})
+2. Replace static text: Text(data.name) instead of Text("John")
+3. Loop through tiles: ...data.tiles.map((tile) => Card(...)).toList()
+4. Wrap in ListView for scrolling
+
+================================================================================
+
+EX 4 - Manage a list of jokes
+
+Q1: What type of data will store the jokes?
+- List<Joke> - A list of Joke objects
+- Each Joke has: String title, String description
+
+Q2: What type of data will store the favorite joke?
+- int? favoriteJokeIndex (nullable integer)
+- Stores the index of the favorite joke
+- null means no favorite selected
+
+Q3: Which widget should be in charge of storing the favorite joke?
+- The PARENT widget (JokesApp - StatefulWidget)
+- Because all joke cards need to know which one is favorite
+
+Q4: Which widget should be stateful?
+- JokesApp (Parent) - StatefulWidget (stores favorite state)
+- FavoriteCard (Child) - StatelessWidget (just displays data)
+
+Q5: How will your widgets interact?
+- Parent passes data DOWN to children: joke, isFavorite bool, callback
+- Child calls callback UP to parent when heart icon clicked
+- Parent updates state → all children rebuild with new state
+
+Q6: Do you need to pass callback function between widgets?
+- YES! Pass onFavoriteClick callback from parent to child
+- Child calls this function when heart icon is tapped
+- This allows child to trigger state change in parent
+
+Key Implementation:
+void setFavorite(int index) {
+  setState(() {
+    favoriteJokeIndex = (favoriteJokeIndex == index) ? null : index;
+  });
+}
+
+This is "lifting state up" - parent controls favorite, preventing multiple selections.
+
+================================================================================
+
+BONUS - Handle TextField Input
+
+Solution 1 - State Variable:
+String temperatureInput = '';
+
+TextField(
+  onChanged: (value) => setState(() => temperatureInput = value)
+)
+
+Convert: double? celsius = double.tryParse(temperatureInput);
+
+Solution 2 - TextEditingController:
+final controller = TextEditingController();
+TextField(controller: controller)
+Get value: controller.text
+Don't forget: dispose() the controller
+
+END OF ANSWERS
